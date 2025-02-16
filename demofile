@@ -1,4 +1,4 @@
-pipeline 
+=pipeline 
 { 
   agent any 
   stages
@@ -7,28 +7,33 @@ pipeline
     {
       steps 
       { 
-        // Checkout your source code from version control git 'https://github.com/your/repository.git' 
+        // Checkout your source code from version control
+        git branch: 'main', url: 'git@github.com:bhbooton/Maven.git'
       }
     } 
     stage('Build') 
     { 
       steps 
       { 
-        // Use Maven to build your project sh 'mvn clean package' 
+        // Use Maven to build your project 
+	sh 'mvn clean package' 
       }
     } 
     stage('Test') 
     {
       steps 
       {
-         // Run tests if applicable sh 'mvn test' 
+         // Run tests if applicable 
+         sh 'mvn test' 
       } 
     } 
     stage('Deploy')
     { 
       steps 
       {
-         // Deploy your artifact, if necessary // Example: sh 'mvn deploy'
+         // Deploy your artifact, if necessary // Example:
+         sh 'mvn deploy'
+         echo 'deploying applications'
       }
     }
   } 
@@ -36,12 +41,13 @@ pipeline
   { 
     success 
     { 
-      // This block will be executed if the pipeline runs successfully echo 'Pipeline executed successfully!' 
+      // This block will be executed if the pipeline runs successfully 
+      echo 'Pipeline executed successfully!' 
     }
     failure 
     {
-      // This block will be executed if the pipeline fails echo 'Pipeline failed!' 
+      // This block will be executed if the pipeline fails 
+      echo 'Pipeline failed!' 
     }
   }
 }
-
